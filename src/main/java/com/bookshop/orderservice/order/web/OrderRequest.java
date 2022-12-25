@@ -10,13 +10,4 @@ public record OrderRequest(
         @NotNull(message = "Quantity must be defined")
         @Min(value = 1, message = "Min = 1")
         @Max(value = 5, message = "Max = 5")
-        Integer quantity
-) {
-        @Override
-        public String toString() {
-                return "OrderRequest{" +
-                        "isbn='" + isbn + '\'' +
-                        ", quantity=" + quantity +
-                        '}';
-        }
-}
+        Integer quantity) {}

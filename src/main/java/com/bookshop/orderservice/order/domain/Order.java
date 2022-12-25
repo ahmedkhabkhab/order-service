@@ -23,7 +23,6 @@ public record Order(
         Instant createdDate,
         @LastModifiedDate
         Instant lastModifiedDate,
-
         @Version
         int version) {
     public static Order of(String bookIsbn, String bookName, Double bookPrice, Integer quantity, OrderStatus status) {
