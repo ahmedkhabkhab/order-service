@@ -128,9 +128,7 @@
 				</executions>
 				<configuration>
 					<imageName>${project.name}</imageName>
-					<environmentVariables>
-						<BP_JVM_VERSION>17.*</BP_JVM_VERSION>
-					</environmentVariables>
+					<environmentVariables><BP_JVM_VERSION>17.*</BP_JVM_VERSION></environmentVariables>
 					<docker>
 						<publishRegistry>
 							<url>${registry.url}</url>
@@ -138,25 +136,6 @@
 							<password>${registry.token}</password>
 						</publishRegistry>
 					</docker>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.3.1</version>
-				<configuration>
-					<to>
-						<image>${project.name}</image>
-						<auth>
-							<username>${registry.username}</username>
-							<password>${registry.token}</password>
-						</auth>
-					</to>
-					<container>
-						<environment>
-							<BP_JVM_VERSION>17.*</BP_JVM_VERSION>
-						</environment>
-					</container>
 				</configuration>
 			</plugin>
 		</plugins>
