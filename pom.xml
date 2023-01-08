@@ -127,7 +127,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>${project.name}</imageName>
 					<environmentVariables><BP_JVM_VERSION>17.*</BP_JVM_VERSION></environmentVariables>
 					<docker>
 						<publishRegistry>
