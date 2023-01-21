@@ -34,4 +34,4 @@ spec:
             - name: SPRING_FLYWAY_URL
               value: jdbc:postgresql://polar-postgres/polardb_order
             - name: SPRING_RABBITMQ_HOST
-              value: http://polar-rabbitmq
+              value: polar-rabbitmq
