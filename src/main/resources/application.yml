@@ -28,6 +28,22 @@ spring:
         multiplier: 1.1
         initial-interval: 1000
         max-interval: 2000
+  cloud:
+    function:
+      definition: dispatchedOrder
+    stream:
+      bindings:
+        dispatchedOrder-in-0:
+          destination: order-dispatched
+          group: {spring.application.name}
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+    connection-timeout: 5s
+
+
 
 server:
   port: 9002
