@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -30,12 +31,14 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    @Transactional
     public Mono<Order> submitOrder(String isbn, int quantity) {
         return bookClient
                 .getBookByIsbn(isbn)
                 .map(book -> buildAcceptedOrder(book, quantity))
                 .defaultIfEmpty(buildRejectedOrder(isbn, quantity))
-                .flatMap(orderRepository::save);
+                .flatMap(orderRepository::save)
+                .doOnNext(this::publishOrderAcceptedEvent);
     }
 
     public static Order buildRejectedOrder(String isbn, int quantity) {
