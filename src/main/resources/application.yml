@@ -37,13 +37,18 @@ spring:
           destination: order-dispatched
           group: {spring.application.name}
         acceptOrder-out-0:
-          destintion: order-accepted
+          destination: order-accepted
   rabbitmq:
     host: localhost
     port: 5672
     username: user
     password: password
     connection-timeout: 5s
+    bindings:
+      acceptOrder-out-0:
+        producer:
+          transacted: true
+
 
 
 
