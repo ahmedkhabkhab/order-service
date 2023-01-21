@@ -3,12 +3,16 @@ package com.bookshop.orderservice.order.domain;
 import com.bookshop.orderservice.book.Book;
 import com.bookshop.orderservice.book.BookClient;
 import com.bookshop.orderservice.order.event.OrderDispatchedMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 public class OrderService {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
     private final BookClient bookClient;
