@@ -1,9 +1,14 @@
 package com.bookshop.orderservice.order.web;
 
+import com.bookshop.orderservice.config.SecurityConfig;
 import com.bookshop.orderservice.order.domain.Order;
 import com.bookshop.orderservice.order.domain.OrderService;
 import com.bookshop.orderservice.order.domain.OrderStatus;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
+import org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,7 @@ import static org.mockito.BDDMockito.given;
 
 
 @WebFluxTest(OrderController.class) // A test that focuses on WebFlux component targeting OrderController class
+@Import(SecurityConfig.class)
 public class OrderControllerWebFluxTests {
 
     @Autowired
@@ -23,6 +29,9 @@ public class OrderControllerWebFluxTests {
 
     @MockBean
     private OrderService orderService;
+
+    @MockBean
+    ReactiveJwtDecoder reactiveJwtDecoder;
 
     @Test
     public void whenBookNotAvailableThenRejectOrder() {
@@ -34,6 +43,7 @@ public class OrderControllerWebFluxTests {
                 .willReturn(Mono.just(expectedOrder));
 
         webTestClient
+                .mutateWith(SecurityMockServerConfigurers.mockJwt().authorities(new SimpleGrantedAuthority("ROLE_customer")))
                 .post()
                 .uri("/orders")
                 .bodyValue(orderRequest)
