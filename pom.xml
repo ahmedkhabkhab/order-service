@@ -18,6 +18,7 @@
 		<spring.cloud-version>2021.0.3</spring.cloud-version>
 		<testcontainers.version>1.17.6</testcontainers.version>
 		<testkeycloak-version>2.3.0</testkeycloak-version>
+		<oteVersion>1.17.0</oteVersion>
 		<registry.username/>
 		<registry.token/>
 		<registry.url/>
@@ -50,6 +51,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.opentelemetry.javaagent</groupId>
+			<artifactId>opentelemetry-javaagent</artifactId>
+			<version>${oteVersion}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.micrometer</groupId>
