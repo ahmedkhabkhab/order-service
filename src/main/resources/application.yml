@@ -38,23 +38,22 @@ spring:
           group: { spring.application.name }
         acceptOrder-out-0:
           destination: order-accepted
+      rabbit:
+        bindings:
+          acceptOrder-out-0:
+            producer:
+              transacted: true
   rabbitmq:
     host: localhost
     port: 5672
     username: user
     password: password
     connection-timeout: 5s
-    bindings:
-      acceptOrder-out-0:
-        producer:
-          transacted: true
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/PolarBookshop
-
-
 
 server:
   port: 9002
