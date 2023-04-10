@@ -51,3 +51,11 @@ spec:
               port: 9002
             initialDelaySeconds: 5
             periodSeconds: 15
+          volumeMounts:
+            - name: order-config-volume
+              mountPath: /workspace/config
+
+      volumes:
+        name: order-config-volume
+        configMap:
+          name: order-config
