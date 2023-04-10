@@ -56,6 +56,6 @@ spec:
               mountPath: /workspace/config
 
       volumes:
-        name: order-config-volume
-        configMap:
-          name: order-config
+        - name: order-config-volume
+          configMap:
+            name: order-config
